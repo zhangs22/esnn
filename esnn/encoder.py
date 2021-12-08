@@ -15,9 +15,8 @@ class Encoder:
 
         def rcf(x):
             return (
-                1
-                / (self.sigma * np.sqrt(2 * np.pi))
-                * np.exp(-np.square(x - self.mu) / (2.0 * self.sigma ** 2))
+                # 1 / (self.sigma * np.sqrt(2 * np.pi)) *
+                np.exp(-np.square(x - self.mu) / (2.0 * self.sigma ** 2))
             )
 
         self.rcf = np.vectorize(rcf)

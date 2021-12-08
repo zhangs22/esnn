@@ -6,8 +6,8 @@ from esnn.esnn import ESNN
 from esnn.encoder import Encoder
 
 t_start = time()
-X = np.load('../../dataset/mix_x.npy')
-y = np.load('../../dataset/mix_y.npy')
+X = np.load('../../dataset/DoS_x.npy')
+y = np.load('../../dataset/DoS_y.npy')
 k = 100000
 index = np.random.choice(X.shape[0], k, replace=False)
 X_sub = X[index]
