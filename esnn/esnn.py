@@ -25,7 +25,7 @@ class ESNN:
             spikes = self.encoder(sample)
             index = np.argsort(spikes)
             w = np.zeros(len(spikes))
-            w[index] = self.m ** (np.arange(len(spikes)))
+            w[index] = np.floor(255 * self.m ** (np.arange(len(spikes))))
             u_max = np.sum(w ** 2)
             theta = self.c * u_max
 
@@ -51,7 +51,7 @@ class ESNN:
         for i, neuron in enumerate(self.all_neurons):
             self.w_matrix[i, :] = neuron.w
             self.all_theta[i] = neuron.t
-
+        # np.save('w_matrix', self.w_matrix)
         pred = np.zeros(len(samples), dtype="int")
         for i, sample in enumerate(samples):
             spikes = self.encoder(sample)
@@ -68,7 +68,7 @@ class ESNN:
         self.all_psp = np.zeros(len(self.all_neurons))
         s = np.argsort(spikes)  # sorted by spike time
         for i, idx in np.ndenumerate(s):
-            self.all_psp = self.all_psp + self.w_matrix[:, idx] * (self.m ** i[0])
+            self.all_psp = self.all_psp + self.w_matrix[:, idx] * int(np.floor(255 * (self.m ** i[0])))
             active_neurons = np.argwhere(self.all_psp - self.all_theta > 0)
 
             if len(active_neurons) > 0:

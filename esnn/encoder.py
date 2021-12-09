@@ -25,5 +25,6 @@ class Encoder:
         vec = vec.flatten()
         res = np.zeros([vec.shape[0], self.num_fields])
         for index, val in np.ndenumerate(vec):
-            res[index[0] :] = self.rcf(val)
-        return 1 - res.flatten()
+            res[index[0], :] = self.rcf(val)
+        st = np.floor(32 * (1 - res.flatten()))
+        return st
