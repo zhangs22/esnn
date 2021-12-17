@@ -51,7 +51,7 @@ class ESNN:
         for i, neuron in enumerate(self.all_neurons):
             self.w_matrix[i, :] = neuron.w
             self.all_theta[i] = neuron.t
-        # np.save('w_matrix', self.w_matrix)
+        # np.save('../../w_matrix', self.w_matrix)
         pred = np.zeros(len(samples), dtype="int")
         for i, sample in enumerate(samples):
             spikes = self.encoder(sample)
@@ -73,6 +73,8 @@ class ESNN:
 
             if len(active_neurons) > 0:
                 neuron_idx = active_neurons[0][0]
+                # neuron_psp = self.all_psp[neuron_idx]
+                # neuron_weight = self.w_matrix[neuron_idx, :]
                 return {"idx": neuron_idx, "spike_time": spikes[idx]}
         return None
 
